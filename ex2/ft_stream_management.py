@@ -33,7 +33,9 @@ if __name__ == "__main__":
             file.close()
 
             print("---")
-            new_file = input("Enter new file name (or empty): ")
+            sys.stdout.write("Enter new file name (or empty): ")
+            sys.stdout.flush()
+            new_file = sys.stdin.readline().rstrip("\n")
 
             if new_file:
                 print(f"Saving data to '{new_file}'")
@@ -45,4 +47,6 @@ if __name__ == "__main__":
                 print("Not saving data.")
 
         except Exception as e:
-            print(f"Error opening file '{file_name}': {e}")
+            print(f"[STDERR] Error opening file '{file_name}': {e}",
+                  file=sys.stderr)
+            print("Data not saved.")
